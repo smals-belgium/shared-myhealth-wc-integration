@@ -21,13 +21,8 @@ export enum Configuration {
   PROD = "prod"
 }
 
-export type ComponentAccessTokenService = {
-  // Return null when an new authentication flow has been started. Caller should abort whatever it's currently doing
-  getAccessToken: (audience:string) => Promise<string|null>,
-
-  // Return null when an new authentication flow has been started. Caller should abort whatever it's currently doing
-  getIdToken: () => Promise<string|null>
-}
+// Return null when an new authentication flow has been started. Caller should abort whatever it's currently doing
+export type GetAccessToken = (audience:string) => Promise<string|null>
 
 export type ComponentCache = {
   get:    (key:string) => any
@@ -41,14 +36,13 @@ export type ComponentOfflineStore = {
   remove: (key:string) => Promise<void>
 }
 
-
 export type RefreshCallback = (done:()=>void) => void
 export type RegisterRefreshCallback = (callback:RefreshCallback) => void
 
 export type ComponentServices = {
-  accessToken:             ComponentAccessTokenService,
   cache:                   ComponentCache,
   offlineStore?:           ComponentOfflineStore,
+  getAccessToken:          GetAccessToken,
   registerRefreshCallback: RegisterRefreshCallback
 }
 
