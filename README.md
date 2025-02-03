@@ -2,7 +2,11 @@
 
 This module defines the types used to describe the inputs and outputs exposed by the MyHealth Web Components.
 
+It also provides a web component documentation template (markdown) at: [README-component.template.md](README-component.template.md).
+
 Please refer to the specification located at the root of this repository, under `myhealth-webcomponent-specification-vX.Y.pdf`
+
+
 
 
 ### `componentSpecVersion`
@@ -32,30 +36,20 @@ Used by the `configName` input.
 Complex type composed of the following:
 
 ```
-  accessToken:             ComponentAccessTokenService,
-  cache:                   ComponentCache,
-  offlineStore?:           ComponentOfflineStore,
-  registerRefreshCallback: RegisterRefreshCallback
+cache:                   ComponentCache,
+offlineStore?:           ComponentOfflineStore,
+getAccessToken:          GetAccessToken,
+registerRefreshCallback: RegisterRefreshCallback
 ```
-
-#### `ComponentAccessTokenService`
-
-Provides methods to retrieve access and ID tokens
-
-```
-  getAccessToken: (audience:string) => Promise<string|null>,
-  getIdToken:     ()                => Promise<string|null>
-```
-
 
 #### `ComponentCache`
 
 Provides methods to access the in-memory cache provided by integrators.
 
 ```
-  get:    (key:string)            => any
-  set:    (key:string, value:any) => void
-  remove: (key:string)            => void
+get:    (key:string)            => any
+set:    (key:string, value:any) => void
+remove: (key:string)            => void
 ```
 
 
@@ -64,10 +58,19 @@ Provides methods to access the in-memory cache provided by integrators.
 Provides methods to access the optional offline store provided by integrators.
 
 ```
-  get:    (key:string)                                => Promise<any>
-  set:    (key:string, value:any, encryption:boolean) => Promise<void>
-  remove: (key:string)                                => Promise<void>
+get:    (key:string)                                => Promise<any>
+set:    (key:string, value:any, encryption:boolean) => Promise<void>
+remove: (key:string)                                => Promise<void>
 ```
+
+#### `getAccessToken`
+
+Function definition used by components to retrieve an access token (exchanged provided the `audience`)
+
+```
+type GetAccessToken = (audience:string) => Promise<string|null>
+```
+
 
 #### `RegisterRefreshCallback`
 

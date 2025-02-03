@@ -1,5 +1,12 @@
+# main
 
-# 1.1.0 (2025-01-14)
+# 1.2.0
+
+* Specification v1.2
+* replaced the `accessToken` service with the `getAccessToken()` function (thus also removing the `getIdToken()` method)
+
+
+# 1.1.0
 
 * First official version of the specification
 * Types definition according to the spec v1.1
