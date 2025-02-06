@@ -1,5 +1,9 @@
 # main
 
+# 1.2.1
+
+* Auto generate `componentSpecVersion` out of the version found in `package.json`
+
 # 1.2.0
 
 * Specification v1.2

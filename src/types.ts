@@ -5,7 +5,8 @@
 // The const below holds the version of the specification and has the form: <major>.<minor>
 // Minor changes are expected to be backward compatible, so one working with v2.1 can be injected any v2.x where x>=0
 // Major changes are expected to be broken changes and this not backward compatible.
-export const componentSpecVersion = "1.1"
+import { version } from './version'
+export const componentSpecVersion = version
 
 export enum Language {
   EN = "en",
