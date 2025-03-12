@@ -1,5 +1,10 @@
 # main
 
+# 1.3.0
+
+* Added `demo` `Configuration` enum value
+* Specification v1.3
+
 # 1.2.1
 
 * Auto generate `componentSpecVersion` out of the version found in `package.json`
