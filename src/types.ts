@@ -17,6 +17,7 @@ export enum Language {
 
 export enum Configuration {
   DEV  = "dev",
+  DEMO = "demo",
   INT  = "int",
   ACC  = "acc",
   PROD = "prod"
