@@ -84,13 +84,6 @@ type RegisterRefreshCallback = (callback:RefreshCallback) => void
 ```
 
 
-### `ComponentError`
-
-Used by components when firing an error event to the host. This complex type contains 2 fields: `title` and `text`, both strings
-
-Used by the `onError` output defined in components.
-
-
 ## Release Process
 
 You can follow the steps below to perform a new release:
