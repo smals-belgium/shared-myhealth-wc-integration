@@ -1,5 +1,9 @@
 # main
 
+# 2.0.0
+
+* Align version with samples and angular library
+
 # 1.3.0
 
 * Added `demo` `Configuration` enum value

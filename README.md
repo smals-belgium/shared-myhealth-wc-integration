@@ -28,7 +28,7 @@ Used by the `language` input.
 
 ### `Configuration`
 
-Enum type used to describe the configuration where a component is being deployed. Possible values: `DEV` (development), `INT` (integration), `ACC` (acceptance), `PROD` (production)
+Enum type used to describe the configuration where a component is being deployed. Possible values: `DEV` (development), `INT` (integration), `ACC` (acceptance), `PROD` (production), `DEMO` (demo), 
 
 Used by the `configName` input.
 
