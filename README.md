@@ -28,7 +28,7 @@ Used by the `language` input.
 
 ### `Configuration`
 
-Enum type used to describe the configuration where a component is being deployed. Possible values: `DEV` (development), `INT` (integration), `ACC` (acceptance), `PROD` (production)
+Enum type used to describe the configuration where a component is being deployed. Possible values: `DEV` (development), `INT` (integration), `ACC` (acceptance), `PROD` (production), `DEMO` (demo), 
 
 Used by the `configName` input.
 
@@ -82,13 +82,6 @@ Function definition used by components to register themselves to receive refresh
 type RefreshCallback = (done:()=>void) => void
 type RegisterRefreshCallback = (callback:RefreshCallback) => void
 ```
-
-
-### `ComponentError`
-
-Used by components when firing an error event to the host. This complex type contains 2 fields: `title` and `text`, both strings
-
-Used by the `onError` output defined in components.
 
 
 ## Release Process

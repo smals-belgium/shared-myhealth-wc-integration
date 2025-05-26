@@ -47,8 +47,3 @@ export type ComponentServices = {
   getAccessToken:          GetAccessToken,
   registerRefreshCallback: RegisterRefreshCallback
 }
-
-export type ComponentError = {
-  title: string,
-  text: string
-}
