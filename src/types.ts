@@ -48,9 +48,13 @@ export type ComponentServices = {
   registerRefreshCallback: RegisterRefreshCallback
 }
 
+export type PrintableMimeType = 'text/html' | 'text/plain' | 'application/pdf' | 'application/base64';
+
+export type PrintableOrientation = 'landscape' | 'portrait';
+
 export type Printable = {
   title: string;
   content: string;
-  mimeType: 'text/html' | 'text/plain' | 'application/pdf' | 'application/base64';
-  orientation?: 'landscape' | 'portrait';
-}
+  mimeType: PrintableMimeType;
+  orientation?: PrintableOrientation;
+};
