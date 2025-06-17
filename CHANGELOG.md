@@ -2,7 +2,7 @@
 
 # 2.0.1
 
-* Add Printable type
+* Add Printable type, PrintableMimeType enum and PrintableOrientation enum
 
 # 2.0.0
 

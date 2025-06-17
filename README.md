@@ -81,7 +81,44 @@ Function definition used by components to register themselves to receive refresh
 ```
 type RefreshCallback = (done:()=>void) => void
 type RegisterRefreshCallback = (callback:RefreshCallback) => void
+
 ```
+
+### `Printable`
+
+Type representing printable content, used by components for their onPrint output
+
+```ts
+type Printable = {
+  title: string;
+  content: string;
+  mimeType: PrintableMimeType;
+  orientation?: PrintableOrientation;
+}
+```
+
+### `PrintableMimeType`
+
+Enum type used to describe the MIME type of the printable content.  
+Used by the `mimeType` property in the `Printable` type.
+
+Possible values:
+
+- `PrintableMimeType.HTML` → `'text/html'`
+- `PrintableMimeType.PLAIN` → `'text/plain'`
+- `PrintableMimeType.PDF` → `'application/pdf'`
+- `PrintableMimeType.BASE64` → `'application/base64'`
+
+
+### `PrintableOrientation`
+
+Enum type used to describe the orientation of printable content.  
+Used by the optional `orientation` property in the `Printable` type.
+
+Possible values:
+
+- `PrintableOrientation.LANDSCAPE` → `'landscape'`
+- `PrintableOrientation.PORTRAIT` → `'portrait'`
 
 
 ## Release Process
