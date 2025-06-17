@@ -47,3 +47,10 @@ export type ComponentServices = {
   getAccessToken:          GetAccessToken,
   registerRefreshCallback: RegisterRefreshCallback
 }
+
+export type Printable = {
+  title: string;
+  content: string;
+  mimeType: 'text/html' | 'text/plain' | 'application/pdf' | 'application/base64';
+  orientation?: 'landscape' | 'portrait';
+}

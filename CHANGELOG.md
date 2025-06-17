@@ -1,5 +1,9 @@
 # main
 
+# 2.0.1
+
+* Add Printable type
+
 # 2.0.0
 
 * Align version with samples and angular library
