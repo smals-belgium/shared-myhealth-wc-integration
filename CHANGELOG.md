@@ -1,5 +1,9 @@
 # main
 
+# 2.0.1
+
+* Add Printable type, PrintableMimeType enum and PrintableOrientation enum
+
 # 2.0.0
 
 * Align version with samples and angular library

@@ -81,19 +81,42 @@ Function definition used by components to register themselves to receive refresh
 ```
 type RefreshCallback = (done:()=>void) => void
 type RegisterRefreshCallback = (callback:RefreshCallback) => void
+
 ```
 
+### `Printable`
 
-## Release Process
+Type representing printable content, used by components for their onPrint output
 
-You can follow the steps below to perform a new release:
+```ts
+type Printable = {
+  title: string;
+  content: string;
+  mimeType: PrintableMimeType;
+  orientation?: PrintableOrientation;
+}
+```
 
-1. Ensure `README.md` is up-to-date with whatever changes made to the specification or types
-2. Ensure the `myhealth-webcomponent-specification-v*.pdf` file has been updated with the corresponding specification version.
-3. Ensure a new entry has been added to the `CHANGELOG.md` file for the new version
-4. Issue `npm version <major|minor|patch>` in the `main` branch to update the version info and generate a corresponding git tag
-5. `git push` the latest commits. Do not git push the tag just yet
-6. Verify that the build pipeline completes successfully
-7. `git push` the version tag and verify a new draft release gets created in the GitHub repository
-8. Update the draft release content with something similar to the added content in the `CHANGELOG.md` and hit the `Publish Release` button
-9. This will kick off the publish pipeline, which will publish the new version of the library to the official NPM registry.
+### `PrintableMimeType`
+
+Enum type used to describe the MIME type of the printable content.  
+Used by the `mimeType` property in the `Printable` type.
+
+Possible values:
+
+- `PrintableMimeType.HTML` → `'text/html'`
+- `PrintableMimeType.PLAIN` → `'text/plain'`
+- `PrintableMimeType.PDF` → `'application/pdf'`
+- `PrintableMimeType.BASE64` → `'application/base64'`
+
+
+### `PrintableOrientation`
+
+Enum type used to describe the orientation of printable content.  
+Used by the optional `orientation` property in the `Printable` type.
+
+Possible values:
+
+- `PrintableOrientation.LANDSCAPE` → `'landscape'`
+- `PrintableOrientation.PORTRAIT` → `'portrait'`
+

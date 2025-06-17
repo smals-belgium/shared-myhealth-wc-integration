@@ -47,3 +47,23 @@ export type ComponentServices = {
   getAccessToken:          GetAccessToken,
   registerRefreshCallback: RegisterRefreshCallback
 }
+
+export enum PrintableMimeType {
+  HTML = 'text/html',
+  PLAIN = 'text/plain',
+  PDF = 'application/pdf',
+  BASE64 = 'application/base64',
+}
+
+export enum PrintableOrientation {
+  LANDSCAPE = 'landscape',
+  PORTRAIT = 'portrait',
+}
+
+export type Printable = {
+  title: string;
+  content: string;
+  mimeType: PrintableMimeType;
+  orientation?: PrintableOrientation;
+};
+
