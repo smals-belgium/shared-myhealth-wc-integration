@@ -61,7 +61,7 @@ Provides methods to access the optional offline store provided by integrators.
 
 ```
 get:    (key:string)                                => Promise<any>
-set:    (key:string, value:any, encryption:boolean) => Promise<void>
+set:    (key:string, value:any) => Promise<void>
 remove: (key:string)                                => Promise<void>
 ```
 
