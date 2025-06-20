@@ -34,7 +34,7 @@ export type ComponentCache = {
 
 export type ComponentOfflineStore = {
   get:    (key:string) => Promise<any>
-  set:    (key:string, value:any, encryption:boolean) => Promise<void>
+  set:    (key:string, value:any) => Promise<void>
   remove: (key:string) => Promise<void>
 }
 

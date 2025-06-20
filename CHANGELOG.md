@@ -1,5 +1,9 @@
 # main
 
+# 3.0.0
+
+* Remove the encryption argument in the set method of the ComponentOfflineStore, to make encryption mandatory
+
 # 2.0.1
 
 * Add Printable type, PrintableMimeType enum and PrintableOrientation enum
