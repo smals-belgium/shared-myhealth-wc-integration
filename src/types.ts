@@ -26,13 +26,13 @@ export enum Configuration {
 // Return null when an new authentication flow has been started. Caller should abort whatever it's currently doing
 export type GetAccessToken = (audience:string) => Promise<string|null>
 
-export type ComponentCache = {
+export type ComponentCacheDataStorage = {
   get:    (key:string) => any
   set:    (key:string, value:any) => void
   remove: (key:string) => void
 }
 
-export type ComponentOfflineStore = {
+export type ComponentOfflineDataStorage = {
   get:    (key:string) => Promise<any>
   set:    (key:string, value:any) => Promise<void>
   remove: (key:string) => Promise<void>
@@ -42,8 +42,8 @@ export type RefreshCallback = (done:()=>void) => void
 export type RegisterRefreshCallback = (callback:RefreshCallback) => void
 
 export type ComponentServices = {
-  cache:                   ComponentCache,
-  offlineStore?:           ComponentOfflineStore,
+  cacheDataStorage:        ComponentCacheDataStorage,
+  offlineDataStorage?:     ComponentOfflineDataStorage,
   getAccessToken:          GetAccessToken,
   registerRefreshCallback: RegisterRefreshCallback
 }

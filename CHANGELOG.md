@@ -1,5 +1,9 @@
 # main
 
+# 4.0.0
+
+* Use terminology cacheDataStorage and offlineDataStorage
+
 # 3.0.0
 
 * Remove the encryption argument in the set method of the ComponentOfflineStore, to make encryption mandatory

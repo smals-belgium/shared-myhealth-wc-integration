@@ -1,6 +1,6 @@
 {
   "name": "@smals-belgium/myhealth-wc-integration",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "MyHealth web component inputs/outputs types definition",
   "author": "smals-labr",
   "license": "LGPL-3.0-or-later",
