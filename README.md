@@ -38,13 +38,13 @@ Used by the `configName` input.
 Complex type composed of the following:
 
 ```
-cache:                   ComponentCache,
-offlineStore?:           ComponentOfflineStore,
+cacheDataStorage:        ComponentCacheDataStorage,
+offlineDataStorage?:     ComponentOfflineDataStorage,
 getAccessToken:          GetAccessToken,
 registerRefreshCallback: RegisterRefreshCallback
 ```
 
-#### `ComponentCache`
+#### `ComponentCacheDataStorage`
 
 Provides methods to access the in-memory cache provided by integrators.
 
@@ -55,7 +55,7 @@ remove: (key:string)            => void
 ```
 
 
-#### `ComponentOfflineStore`
+#### `ComponentOfflineDataStorage`
 
 Provides methods to access the optional offline store provided by integrators.
 
