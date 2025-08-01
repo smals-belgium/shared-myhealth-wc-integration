@@ -9,6 +9,7 @@ export * from './setting/user-language.setting';
 // host events
 export * from './event/refresh.event';
 export * from './event/settings-change.event';
+export * from './event/version-mismatch.event';
 
 // output events
 export * from './event/open.event';

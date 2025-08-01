@@ -1,5 +1,13 @@
 # main
 
+# 5.0.1
+
+* `refresh` event in component manifest `events` is required to declare that a component can refresh its data
+* `VersionMismatch` notification event
+* Ability to explicitly type the `props` of an `OpenEvent`
+* Restored the optional `audience` param of `getAccessToken` (for pseudonymisation scenario)
+* More docs
+
 # 5.0.0
 
 * Module and component "manifests" for code-level annotation (instead of doc-level)

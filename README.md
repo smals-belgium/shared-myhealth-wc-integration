@@ -2,121 +2,69 @@
 
 This module defines the types used to describe the inputs and outputs exposed by the MyHealth Web Components.
 
-It also provides a web component documentation template (markdown) at: [README-component.template.md](README-component.template.md).
+It also provides a web component documentation template (markdown) at: 
+[README-component.template.md](README-component.template.md).
 
-Please refer to the specification located at the root of this repository, under `myhealth-webcomponent-specification-vX.Y.pdf`
-
-This library is published to the NPM registry at: [https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration](https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration)
+This library is published to the NPM registry at: 
+[https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration](https://www.npmjs.com/package/@smals-belgium/myhealth-wc-integration)
 
 
 ## Documentation
 
-### `componentSpecVersion`
+See [Guidelines](./guidelines/00-guidelines.md)
 
-This is a `const` string variable holding the version of the specification implemented by this module.
+Note that the types used in this library are also thoroughly documented,
+so if you prefer to dig in through the code, that's also an option.
 
-This variable can be used by integrators to populate the `version` input.
-It can also be used by component developers to compare it with the `version` input value provided by integrators.
+In that case your best starting point is [MyHealthModule](./src/module/module.ts).  
+Everything else builds up from there.
 
+## Example web component module
 
-### `Language`
-
-Enum type used to describe the language a component should use to display information. Possible values: `EN`, `FR`, `NL`, `DE`
-
-Used by the `language` input.
-
-
-### `Configuration`
-
-Enum type used to describe the configuration where a component is being deployed. Possible values: `DEV` (development), `INT` (integration), `ACC` (acceptance), `PROD` (production), `DEMO` (demo), 
-
-Used by the `configName` input.
-
-
-### `ComponentServices`
-
-Complex type composed of the following:
-
-```
-cacheDataStorage:        ComponentCacheDataStorage,
-offlineDataStorage?:     ComponentOfflineDataStorage,
-getAccessToken:          GetAccessToken,
-registerRefreshCallback: RegisterRefreshCallback
-```
-
-#### `ComponentCacheDataStorage`
-
-Provides methods to access the in-memory cache provided by integrators.
-
-```
-get:    (key:string)            => any
-set:    (key:string, value:any) => void
-remove: (key:string)            => void
-```
-
-
-#### `ComponentOfflineDataStorage`
-
-Provides methods to access the optional offline store provided by integrators.
-
-```
-get:    (key:string)                                => Promise<any>
-set:    (key:string, value:any) => Promise<void>
-remove: (key:string)                                => Promise<void>
-```
-
-#### `getAccessToken`
-
-Function definition used by components to retrieve an access token (exchanged provided the `audience`)
-
-```
-type GetAccessToken = (audience:string) => Promise<string|null>
-```
-
-
-#### `RegisterRefreshCallback`
-
-Function definition used by components to register themselves to receive refresh events.
-
-```
-type RefreshCallback = (done:()=>void) => void
-type RegisterRefreshCallback = (callback:RefreshCallback) => void
-
-```
-
-### `Printable`
-
-Type representing printable content, used by components for their onPrint output
+Example of one web component module with multiple components that work together.  
+It uses the [pre-fetch](./guidelines/06-data_pre-fetching_vs_refreshing.md) to load data before any component
+is displayed, and stores the data in the "cache service" provided by the host application.
 
 ```ts
-type Printable = {
-  title: string;
-  content: string;
-  mimeType: PrintableMimeType;
-  orientation?: PrintableOrientation;
+import {
+  MyHealthModuleBootstrap,
+  family,
+  MyHealthModuleManifest,
+  openEventType
+} from '@smals-belgium/myhealth-wc-integration';
+
+import { hostServices } from './host';
+import { getEmployees } from './employee.api';
+import { EmployeeList } from './view/employee-list';
+import { EmployeeDetail } from './view/employee-detail';
+
+
+const tag = {
+  list: 'wc-employee-list',
+  detail: 'wc-employee-detail'
+};
+
+export const manifest: MyHealthModuleManifest = {
+  specVersion: { major: 5, minor: 0, patch: 0 },
+  family: family('wc-employees'),
+  components: [{
+    tagName: tag.list,
+    events: [openEventType, refreshEventType],
+  }, {
+    tagName: tag.detail,
+    requiredInputs: ['userId'],
+    events: [refreshEventType],
+  }]
+};
+
+
+export const bootstrap: MyHealthModuleBootstrap = ({ services }) => {
+  Object.assign(hostServices, services);
+
+  customElements.define(tag.list, EmployeeList);
+  customElements.define(tag.detail, EmployeeDetail);
+
+  return () => getEmployees()
+    .then(employees => hostServices.cacheDataStorage.set('employees', employees));
 }
 ```
-
-### `PrintableMimeType`
-
-Enum type used to describe the MIME type of the printable content.  
-Used by the `mimeType` property in the `Printable` type.
-
-Possible values:
-
-- `PrintableMimeType.HTML` → `'text/html'`
-- `PrintableMimeType.PLAIN` → `'text/plain'`
-- `PrintableMimeType.PDF` → `'application/pdf'`
-- `PrintableMimeType.BASE64` → `'application/base64'`
-
-
-### `PrintableOrientation`
-
-Enum type used to describe the orientation of printable content.  
-Used by the optional `orientation` property in the `Printable` type.
-
-Possible values:
-
-- `PrintableOrientation.LANDSCAPE` → `'landscape'`
-- `PrintableOrientation.PORTRAIT` → `'portrait'`
-

@@ -1,21 +1,22 @@
+import type { Family } from '../manifest/family';
 import type { SpecVersion } from '../manifest/spec-version';
 
 
-export const versionMismatchEventType = 'version-mismatch' as const;
+export const versionMismatchEventType = 'version-mismatch';
 
 export type VersionMismatchEventDetail = Readonly<{
 
-  /**
-   * The level of the mismatch.
-   * Does not include `major` since the host app will refuse to load the module in that case.
-   */
-  level: 'minor' | 'patch';
+  /** The level of the mismatch. */
+  level: keyof SpecVersion;
 
   /** The version of the spec used by the host application. */
   hostVersion: SpecVersion;
 
   /** The version of the spec used by the web component module. */
   moduleVersion: SpecVersion;
+
+  /** The family that the erroring module belongs to. */
+  family: Family;
 
 }>;
 

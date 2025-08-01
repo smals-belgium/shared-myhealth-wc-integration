@@ -8,7 +8,7 @@ export type SelectEventDetail<T extends string> = Readonly<{
 
 }>;
 
-export const selectEventType = 'select' as const;
+export const selectEventType = 'select';
 
 export const selectEvent = <T extends string>(detail: SelectEventDetail<T>) =>
   new CustomEvent(selectEventType, { detail }) as SelectEvent<T>;

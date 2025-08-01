@@ -19,6 +19,7 @@ import { selectEventType } from '../event/select.event';
  *
  * export const manifest: MyHealthComponentManifest = {
  *   tagName: 'my-component',
+ *   inputs: ['detailId'],
  *   events: ['print']
  * };
  * ```
@@ -30,6 +31,13 @@ export type MyHealthComponentManifest = Readonly<{
    * The host app can use this to instantiate the component.
    */
   tagName: string;
+
+  /**
+   * A list of properties that the component must have a value for so it can work properly.
+   * This is optional because the host application can operate without knowing this,
+   * but providing it gives the host the opportunity to do some validation prior to component initialisation.
+   */
+  requiredProperties?: string[];
 
   /**
    * The events the component emits.
@@ -45,7 +53,12 @@ export type MyHealthComponentManifest = Readonly<{
    * (settings-change is a module level event)
    *
    * This list must be provided if you want the host application to listen to them.
-   * Except `refresh`, which is the only required event.
+   *
+   * **IMPORTANT**: the host application may check the presence of the `refresh` event to decide whether to indicate
+   * to the user that this component can refresh its data.
+   *
+   * Implementation of refresh mechanism is done by listening for `refresh` events with `status: 'request'`
+   * on the component, and responding with a status `success` or `fail` after the operation is completed.
    */
   events?: ComponentEvent[];
 

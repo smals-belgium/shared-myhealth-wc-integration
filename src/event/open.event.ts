@@ -1,17 +1,19 @@
-export type OpenEventDetail = Readonly<{
+type Props = Record<string, unknown>;
+
+export type OpenEventDetail<P extends Props = Props> = Readonly<{
 
   /** The `tagName` of the component to display. */
   componentTag: string;
 
   /** Optional properties to pass to the component. */
-  props?: Record<string, unknown>;
+  props?: P;
 
 }>;
 
-export const openEventType = 'open' as const;
+export const openEventType = 'open';
 
-export const openEvent = (detail: OpenEventDetail) =>
-  new CustomEvent(openEventType, { detail }) as OpenEvent;
+export const openEvent = <P extends Props = Props>(detail: OpenEventDetail<P>) =>
+  new CustomEvent(openEventType, { detail }) as OpenEvent<P>;
 
 /**
  * Request the host application to display the component provided in the event detail.
@@ -49,4 +51,4 @@ export const openEvent = (detail: OpenEventDetail) =>
  * living in the same [module](./05-modules_and_prefetching.md) it's perfectly possible to use a module's internal state
  * to pass information from one component to another.
  */
-export type OpenEvent = CustomEvent<OpenEventDetail> & { type: typeof openEventType };
+export type OpenEvent<P extends Props = Props> = CustomEvent<OpenEventDetail<P>> & { type: typeof openEventType };

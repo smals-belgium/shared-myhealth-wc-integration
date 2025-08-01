@@ -19,7 +19,7 @@ import type { SpecVersion } from './spec-version';
  * import { entryComponentManifest } from './entry-component.ts';
  *
  * export const manifest: MyHealthModuleManifest = {
- *   specVersion: { major: 5, minor: 0 },
+ *   specVersion: { major: 5, minor: 0, patch: 0 },
  *   family: family('my-family'),
  *   components: [entryComponentManifest]
  * };

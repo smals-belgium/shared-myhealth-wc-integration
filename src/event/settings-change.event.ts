@@ -25,7 +25,7 @@ export type SettingsChangeEventDetail = Readonly<{
   }
 }[keyof HostSettings]>;
 
-export const settingsChangeEventType = 'settings-change' as const;
+export const settingsChangeEventType = 'settings-change';
 
 export const settingsChangeEvent = (detail: SettingsChangeEventDetail) =>
   new CustomEvent(settingsChangeEventType, { detail }) as SettingsChangeEvent;

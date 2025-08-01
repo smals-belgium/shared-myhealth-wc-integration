@@ -5,7 +5,7 @@ export type RefreshEventDetail = Readonly<{
 
 }>;
 
-export const refreshEventType = 'refresh' as const;
+export const refreshEventType = 'refresh';
 
 export const refreshEvent = (detail: RefreshEventDetail) =>
   new CustomEvent(refreshEventType, { detail }) as RefreshEvent;
@@ -16,9 +16,11 @@ export const refreshEvent = (detail: RefreshEventDetail) =>
  *
  * This event is only used at the component level, since we only want to refresh the data of a specific component.
  * It is the host application's job to dispatch a `request` on the component.
- * The web component **must** listen to this event and respond with a `success` or `fail` status
- * when the refresh operation is done. Even if it doesn't need to refresh anything,
- * otherwise the host app will remain in a "requesting" state forever.
+ * The web component can listen to this event and respond with a `success` or `fail` status
+ * when the refresh operation is done.
+ *
+ * The host app determines whether a component's data can be refreshed, based on the presence of the `refresh` event
+ * in the component manifest.
  *
  * Extending from the base `WebComponentElement` class will automatically take care of this.
  * @see WebComponentElement

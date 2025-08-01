@@ -62,6 +62,6 @@ export type HostServices = Readonly<{
    * When a web component is loaded, the user should already be authenticated.
    * If for whatever reason there should not be a valid token present, the Promise will be rejected.
    */
-  getAccessToken(): Promise<AccessToken>;
+  getAccessToken(audience?: string): Promise<AccessToken>;
 
 }>;

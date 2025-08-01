@@ -30,7 +30,7 @@ export type PrintEventDetail = Readonly<{
 
 }>;
 
-export const printEventType = 'print' as const;
+export const printEventType = 'print';
 
 export const printEvent = (detail: PrintEventDetail) =>
   new CustomEvent(printEventType, { detail }) as PrintEvent;
