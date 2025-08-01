@@ -1,0 +1,31 @@
+name: NPM manual unpublish
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+jobs:
+  unpublish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 22.x ]
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      # cannot checkout the release that got deleted since the associated tag does not exist anymore
+      # checking out code is required for the npm unpublish command to work.
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Unpublish from NPM
+        run: npm unpublish @smals-belgium/myhealth-wc-integration@${{ github.event.inputs.version }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

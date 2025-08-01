@@ -1,6 +1,6 @@
 /**
  * @summary
- * A type for grouping multiple web-components that interact with each other.
+ * A type for grouping multiple web-components that loosely interact with each other.
  *
  * @description
  * Web components are fairly granular. This means that a set of features would likely be broken down into
@@ -15,8 +15,7 @@
  *  - all components of a given family share the same (in-memory) cache (@see HostServices#cacheDataStorage)
  *  - all components of a given family share the same data storage area
  * (in SQL we would say 1 family = 1 database table)
- *  - it would be logical to bundle all components of a family into a single npm package, but it's not a must
- * this type will tie components together even if they come from different packages
+ *  - components of one family _can_ be grouped together in one `module` and/or NPM package, but they don't have to
  *
  * `Family` is a so-called branded type, which means at runtime it's just a string, but at compile time it is more
  * precise. You can assign a `Family` to a `string`, but you can't assign a `string` (or any other branded type)

@@ -2,7 +2,7 @@
   "name": "@smals-belgium/myhealth-wc-integration",
   "version": "5.0.0",
   "description": "MyHealth web component inputs/outputs types definition",
-  "author": "smals-labr",
+  "author": "smals",
   "license": "LGPL-3.0-or-later",
   "repository": {
     "type": "git",
@@ -18,10 +18,10 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "guidelines",
     "README-component.template.md",
     "README.md",
-    "CHANGELOG.md",
-    "myhealth-webcomponent-specification-*.pdf"
+    "CHANGELOG.md"
   ],
   "scripts": {
     "test": "echo No tests",
