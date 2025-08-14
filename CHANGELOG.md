@@ -1,5 +1,37 @@
 # main
 
+# 5.0.1
+
+* `refresh` event in component manifest `events` is required to declare that a component can refresh its data
+* `VersionMismatch` notification event
+* Ability to explicitly type the `props` of an `OpenEvent`
+* Restored the optional `audience` param of `getAccessToken` (for pseudonymisation scenario)
+* More docs
+
+# 5.0.0
+
+* Module and component "manifests" for code-level annotation (instead of doc-level)
+* Module bootstrap without instantiating components
+* Pre-fetching mechanism to preload data for components in the background
+* Official support for multiple components per package
+* Added an event bus to the `HostServices` to signal relevant changes in the host app (like settings changes)
+* `ComponentServices` is no longer a component input; it has been replaced with `HostServices` passed into the
+`bootstrap` function at the module level
+* `version` at component level is now `specVersion` in the module manifest 
+(all components of the same module share a version number)
+and the version check will be done by the host app instead of the web component
+* Created a base class for vanilla JS web component implementations
+* Added event types and factories
+* Converted enums to ES-compatible implementations (backwards compatible)
+* Better, stronger typing
+* Improve code doc
+* Add guidelines to repo (moved from private confluence)
+* `getAccessToken` no longer returns `null`, if something is wrong it will reject the Promise instead
+* `cacheDataStorage` implements full `Map` interface
+* `OfflineDataStorage.remove` renamed to `delete` for better alignment with `Map` interface
+* Replaced `RegisterRefreshCallback` with an event-based approach
+* Added `.editorConfig` to the project
+
 # 4.0.0
 
 * Use terminology cacheDataStorage and offlineDataStorage
