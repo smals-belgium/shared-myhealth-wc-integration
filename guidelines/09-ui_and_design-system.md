@@ -9,6 +9,14 @@ internal elements. Together, these tools ensure visual consistency and flexibili
 To ensure seamless integration with Mags, all web components must conform to the 
 [MyHealthBelgium.be](http://myhealthbelgium.be/) Design Kit.
 
+# Table of Contents
+
+- [Browser's native Shadow DOM](#browsers-native-shadow-dom)
+- [My Health Design Kit](#my-health-design-kit)
+- [CSS variables (–*)](#css-variables-)
+- [Slots](#slots)
+- [Parts](#parts)
+- [Scrolling & pagination](#scrolling--pagination)
 
 ## Browser's native Shadow DOM
 
@@ -232,3 +240,23 @@ custom-component::part(submit-button) {
 ```
 
 Remember that each exposed part creates an additional maintenance consideration and potential point of failure. Use parts judiciously as a fallback when CSS variables cannot meet customization requirements.
+
+## Scrolling & pagination
+
+The host controls the overall page scroll; web components must not add their own page-level scrollbars.  
+If pagination is needed, a component may implement a “load more” function tied to the host’s scroll viewport.  
+Internal scrolling is allowed for self-contained UI parts (e.g., dropdowns, sub-lists).
+
+### Guidelines & Explanation
+
+- **No nested page scrollbars:** Do not set `overflow: auto/scroll` or fixed heights on the component root that create an inner scroller.  
+  *Explanation:* Prevents double scrollbars and conflicting gestures, ensures consistent UX, and improves accessibility and performance.
+
+- **Host owns scrolling:** Components should expand to natural height and rely on the host’s viewport.  
+  *Explanation:* Centralizes scroll management and keeps user experience predictable.
+
+- **Pagination trigger inside the component:** The web component itself should observe when it nears the end of the host’s viewport and trigger a “load more.”  
+  *Explanation:* Keeps pagination logic self-contained within the component, while still relying on the host’s scrolling.
+
+- **Exceptions:** Control-internal scroll (e.g., dropdown menus, textareas) is fine.  
+  *Explanation:* Only component-internal content can manage its own scroll without affecting the page-level scroll behavior.
