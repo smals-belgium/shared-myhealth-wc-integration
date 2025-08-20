@@ -13,6 +13,7 @@ To ensure seamless integration with Mags, all web components must conform to the
 
 - [Browser's native Shadow DOM](#browsers-native-shadow-dom)
 - [My Health Design Kit](#my-health-design-kit)
+- [Styling and Background](#styling-and-background)
 - [CSS variables (–*)](#css-variables-)
 - [Slots](#slots)
 - [Parts](#parts)
@@ -66,9 +67,15 @@ design kit, so they maintain a consistent look and feel with the rest of the MyH
 
 [Storybook](https://smals-belgium.github.io/myhealth-storybook-design-kit)
 
+## Styling and Background
+
+Web components must have a **transparent background** by default, while the host application is responsible for providing the background styling, such as colors, or gradients.   
+This approach ensures visual consistency across all components, supports theming flexibility (e.g., light and dark modes), and prevents duplication of styling logic.    
+Components should **not override** the host’s background unless explicitly required, such as for modals or overlays.
+
 ## CSS variables (–*)
 
-If the MyHealth Design Kit does not meet your styling needs, use CSS variables for any necessary customizations. 
+Use CSS variables for any necessary customizations. If the MyHealth Design Kit does not fully meet your styling needs, extend it with CSS variables rather than overriding styles directly.    
 CSS variables (or CSS custom properties) are reusable style values that you can update dynamically. 
 These powerful properties enhance style maintainability and flexibility, particularly when implementing themes or 
 maintaining consistent design elements across your components.
