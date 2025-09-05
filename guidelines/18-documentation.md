@@ -11,6 +11,7 @@ This documentation must include the following information:
   - optional parameters
   - description of that output, when it's being fired, etc.
 - List of all the services that will be required by the component, such as Location or Calendar services.
+- [Access management setup](./19-access_management.md)
 
 The [README-component.template.md](../README-component.template.md) file gives a Markdown template to document your 
 components.

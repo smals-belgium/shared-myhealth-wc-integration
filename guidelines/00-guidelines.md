@@ -25,6 +25,7 @@ outlined in the guidelines.
 16. [Guideline on mobile permissions](./16-mobile_permissions.md)
 17. [Guideline on registry publishing](./17-registry.md)
 18. [Guideline on documentation](./18-documentation.md)
+19. [Guideline on access management](./19-access_management.md)
 
 Go back to the package [README](../README.md) for a full bootstrapping example.
 
