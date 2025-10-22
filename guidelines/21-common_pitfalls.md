@@ -3,7 +3,13 @@
 ## FAQ
 
 - Q: I'm binding a boolean value into my web component, but it comes out as a string `"true"` instead of `true`  
-A: read about [the difference between HTML attributes and properties](#html-attributes-vs-properties)
+A: Read about [the difference between HTML attributes and properties](#html-attributes-vs-properties)
+- Q: After the user navigates away from my web component, some of its code is still being executed  
+A: You probably forgot to clean up some listeners when the component is removed from the DOM  
+Read about [component destruction in the lifecycle hooks](#init-and-destroy)
+- Q: My component needs to adapt when the user language changes, but `user-language` is an attribute and I don't know 
+how to track changes in element attributes  
+A: Read about [observedAttributes and how to observe their changes](#observing-attribute-changes)
 
 ## Custom web components
 
@@ -48,7 +54,7 @@ In Angular elements, _attributes_ are automatically mapped to input _properties_
 more modern `input` signals both work. **But the type coercion is still your responsibility!**  
 You can use coercion functions available in `@angular/core`.
 ```ts
-import { booleanAttribute } from '@angular/core'
+import { booleanAttribute, Component, input } from '@angular/core'
 
 @Component({ ... })
 class MyComp {
@@ -64,6 +70,49 @@ the input _property_, since it's a signal and not a simple value, it goes like `
 of `myComp.myBoolean = true`.
 
 ### The component lifecycle
+
+#### Init and destroy
+
+Implement `connectedCallback` to execute logic when the element has been added to the DOM.  
+Implement `disconnectedCallback` to execute logic when the element has been removed from the DOM.  
+
+**Angular** will still execute its own lifecycle hooks, so you can use your usual `ngOnInit` and `ngOnDestroy`
+instead of the above native hooks.
+
+#### Observing attribute changes
+
+Observed attributes must be registered by setting the `static observedAttributes` member.  
+Any value change to an attribute in this list will then trigger the `attributeChangedCallback` hook.
+
+```js
+class MyComp extends HTMLElement {
+  static observedAttributes = ['my-boolean'];
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log(`Attribute ${name} has changed from ${oldValue} to ${newValue}.`);
+  }
+}
+```
+
+**Angular** elements will automatically register inputs as `observedAttributes`.  
+i.e. when setting an attribute through `setAttribute` Angular will still execute the `ngOnChanges` hook for the 
+corresponding input.
+
+Bearing in mind that Angular groups simultaneous changes, the equivalent to the above vanilla JS code would be
+```ts
+class MyComp implements OnChanges {
+  readonly myBoolean = input(false, { transform: booleanAttribute });
+
+  ngOnChanges(changes) {
+    Object.entries(changes).forEach(([name, change]) => console.log(
+      `Input ${name} has changed from ${change.previousValue} to ${change.currentValue}.`
+    ));
+  }
+}
+```
+
+For further reference, read the 
+[MDN guide](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
 
 ## Navigation
 
