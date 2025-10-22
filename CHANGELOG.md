@@ -1,5 +1,10 @@
 # main
 
+# 5.0.2
+
+* new guideline on working with documents
+* common pitfalls documentation
+
 # 5.0.1
 
 * `refresh` event in component manifest `events` is required to declare that a component can refresh its data
