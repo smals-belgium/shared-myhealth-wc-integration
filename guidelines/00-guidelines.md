@@ -4,6 +4,9 @@
 Developers are free to use any technology stack to build their web components 
 (see [webcomponents.org](https://www.webcomponents.org/) for reference).
 
+How to develop custom web components and properly implement the spec, is beyond the scope of these guidelines,
+but we've gathered a couple [common pitfalls](./21-common_pitfalls.md#custom-web-components) for you to look into.
+
 The only requirements are to correctly implement the defined inputs and outputs, and to provide the documentation 
 outlined in the guidelines.
 
@@ -26,6 +29,8 @@ outlined in the guidelines.
 17. [Guideline on registry publishing](./17-registry.md)
 18. [Guideline on documentation](./18-documentation.md)
 19. [Guideline on access management](./19-access_management.md)
+20. [Guideline on working with documents](./20-working_with_documents.md)
+21. [Common pitfalls](./21-common_pitfalls.md)
 
 Go back to the package [README](../README.md) for a full bootstrapping example.
 

@@ -14,12 +14,16 @@ However, you are required to implement some, and you are free to ignore the opti
 
 An implementor can decide whether to handle host settings at the module or at the component level.
 
-### Web component properties
+### Web component attributes
 
-All web components instantiated by the host will receive host settings through properties/attributes. Simply monitor
-changes to these properties to do what's required. Bear in mind that if you take this approach, each web component
+All web components instantiated by the host will receive host settings through attributes. Simply monitor
+changes to these attributes to do what's required. Bear in mind that if you take this approach, each web component
 must (re-)implement the same watching mechanism. For example, each component must be translated into multiple languages,
-so each one of them must listen for changes to `userLanguage`.
+so each one of them must listen for changes to the `user-language` attribute.
+
+Be aware that there is a difference between component attributes and properties. If you're uncertain how to implement
+attributes in a custom component, have a look at the web components implementation section
+in [our common pitfalls](./21-common_pitfalls.md#custom-web-components).
 
 ### Module parameters
 
