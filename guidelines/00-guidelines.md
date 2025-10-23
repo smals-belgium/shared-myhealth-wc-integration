@@ -18,7 +18,7 @@ outlined in the guidelines.
 6. [Guideline on data pre-fetching versus refreshing](./06-data_pre-fetching_vs_refreshing.md)
 7. [Guideline on manifests](./07-manifest.md)
 8. [Guideline on accessibility](./08-accessibility.md)
-9. [Guideline on UI (ui-variables / design system)](09-ui_and_design-system.md)
+9. [Guideline on UI (ui-variables / design system)](./09-ui_and_design-system.md)
 10. [Guideline on mobile gestures supported in MAGS-app](./10-mobile_gestures.md)
 11. [Guideline on navigation](./11-navigation.md)
 12. [Guideline on security](./12-security.md)

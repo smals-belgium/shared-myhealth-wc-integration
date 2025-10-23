@@ -27,7 +27,7 @@ in [our common pitfalls](./21-common_pitfalls.md#custom-web-components).
 
 ### Module parameters
 
-We'll talk about [modules](./05-modules_and_prefetching.md) more in depth in a different chapter, but at this point it's 
+We'll talk about [modules](./05-modules.md) more in depth in a different chapter, but at this point it's 
 sufficient to know that it's a level above web components that **will receive the same properties as each web 
 component** from the host application. 
 
@@ -74,7 +74,7 @@ The possible configuration values are:
 - `demo`: demo mode (no auth / backend)
 
 When injected with the "demo" value it is expected that only static/mock data will be rendered. 
-See the Guideline on [demo mode](./09-demo.md).  
+See the Guideline on [demo mode](./14-demo.md).  
 This input is required, because at the very least the demo mode must be implemented. 
 Otherwise, what you implement in terms environment handling is entirely up to you,
 but remember that the host application may implement these different environments,
