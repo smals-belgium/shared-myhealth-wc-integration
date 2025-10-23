@@ -59,7 +59,7 @@ Obviously, avoid passing any of the [host settings](./02-host_settings.md) like 
 application's responsibility.
 
 It's also worth noting that it's not strictly necessary to work with properties like this. Given multiple components
-living in the same [module](./05-modules_and_prefetching.md) it's perfectly possible to use a module's internal state
+living in the same [module](./05-modules.md) it's perfectly possible to use a module's internal state
 to pass information from one component to another.
 
 ### PrintEvent

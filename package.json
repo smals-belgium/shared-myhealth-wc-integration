@@ -25,9 +25,11 @@
   ],
   "scripts": {
     "test": "echo No tests",
-    "build": "node generate-version.js && tsup"
+    "build": "node generate-version.js && tsup",
+    "lint:doc": "markdown-link-check ./guidelines --alive 200,0"
   },
   "devDependencies": {
+    "markdown-link-check": "^3.14.1",
     "ts-node": "^10.9.2",
     "tsup": "^8.3.6",
     "typescript": "^5.7.2"

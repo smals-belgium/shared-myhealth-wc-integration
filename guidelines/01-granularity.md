@@ -3,7 +3,7 @@
 MyHealth will be built using [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) (wc) 
 to ensure a consistent UX across all possible platforms and host applications.
 
-Those components must adhere to a set of [inputs & outputs](./02-interfacing.md) and a granularity that allows them 
+Those components must adhere to a set of [inputs & outputs](./02-host_settings.md) and a granularity that allows them 
 to be placed in various configurations depending on how the host app wants to integrate them.
 
 ## Granularity
@@ -44,7 +44,7 @@ For instance, everything related to prescriptions can be a family (composed of a
  a detail view on one specific prescription, etc.).
 
 There are a few considerations linked with this concept of `family`:
-- all components of a given family share the same (in-memory) cache (see [inputs](./02-interfacing.md))
+- all components of a given family share the same (in-memory) cache (see [inputs](./02-host_settings.md))
 - all components of a given family share the same data storage area (in sql we would say 1 family = 1 database table)
 - components of one family _can_ be grouped together in one `module` and/or NPM package, but they don't have to
 
