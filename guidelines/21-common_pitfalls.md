@@ -10,6 +10,9 @@ Read about [component destruction in the lifecycle hooks](#init-and-destroy)
 - Q: My component needs to adapt when the user language changes, but `user-language` is an attribute and I don't know 
 how to track changes in element attributes  
 A: Read about [observedAttributes and how to observe their changes](#observing-attribute-changes)
+- Q: The guidelines say my web component is not allowed to do any navigation, but WCAG tells me I _should_ be using
+proper navigation elements (like `<a href="./url"></a>)  
+A: Check our [proposed solutions](#navigation)
 
 ## Custom web components
 
@@ -115,6 +118,110 @@ For further reference, read the
 [MDN guide](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
 
 ## Navigation
+
+According to the [guidelines om navigation](./11-navigation.md), you are not allowed to do any URL-level navigation
+within a web component. This is because different host apps may want to treat navigation differently.  
+But semantically your UI elements must still be navigation elements. You may still want to us `<a>` tags, and even
+if you don't in terms of accessibility the elements must behave like navigation elements, i.e. they must be focusable
+and have proper keyboard interaction.
+
+Here are a couple of solutions to this problem:
+
+### Manual focus and keyboard support
+
+The most ad-hoc solution is to use buttons and "manually" add focus and proper keyboard support to them.
+This usually consists of
+- adding a `tabindex`
+- handling keyboard Enter event to do the same thing as a click event
+
+#### Vanilla HTML/JS
+
+```js
+theButton.setAttribute('tabindex', '0');
+theButton.addEventListener('click', navigateOnHost);
+theButton.addEventListener('keydown', event => {
+  if (event.key === 'Enter') navigateOnHost();
+});
+```
+
+#### Angular
+
+```html
+<button
+  type="button"
+  tabindex="0"
+  (click)="navigateOnHost()"
+  (keydown.enter)="navigateOnHost()">
+
+  navigate
+</button>
+```
+
+### Reusable navigation interception
+
+For a more consistent approach to the problem, you may consider creating an artifact that intercepts all usages
+of `<a>` and modify the default behaviour. The core of this solution consists of
+- preventing the default event
+- dispatching a [myHealth open event](./03-component_events.md#openevent) instead
+
+The exact implementation may depend on your needs and framework of choice, but here are some examples:
+
+#### Vanilla HTML/JS
+
+Below is a naive implementation that selects all `<a>` tags with a `data-component` attribute that are children of 
+the root web component and
+- sets an `href` attribute to ensure readability for screen readers and WCAG compliance
+- prevents the default behaviour on click and replaces it with dispatching a custom event on the web component
+For example you may have a list of users with links to details as `<a data-component="userDetail">{{ user.name }}</a>`.
+
+```js
+rootComponent
+  .querySelectorAll('a[data-component]')
+  .forEach(a => {
+    const component = a.getAttribute('data-component');
+    a.setAttribute('href', `/my-domain/${component}`);
+    a.addEventListener('click', event => {
+      event.preventDefault();
+      rootComponent.dispatch(open(component));
+    }
+  });
+```
+
+#### Angular
+
+Below is a very simple implementation of a directive that allows the usage of an `<a>` tag to navigate to a specific
+other web component. For example you may have a list of users with links to details as 
+`<a component="userDetail">{{ user.name }}</a>`.
+
+```ts
+@Directive({
+  selector: 'a[component]',
+  host: {
+    '[attr.href]': 'href()'
+  }
+})
+export class ComponentAnchorDirective {
+
+  readonly #hostEvents = inject(HostEventService);
+
+  readonly component = input.required<string>();
+  protected readonly href = computed(() => `/my-domain/${this.component()}`);
+
+  @HostListener('click')
+  onClick() {
+    this.#hostEvents.dispatch(open(this.component()));
+    return false;
+  }
+
+}
+```
+So what happens here ?
+- the binding on the `href` attribute ensures readability for screen readers (and WCAG compliance)
+- the click handler returns `false` to stop the default behaviour when clicking a link, 
+and replaces it with custom event dispatching
+
+This is a minimal starting point. From here you can add additional inputs, for example to pass additional properties
+to the invoked component.
 
 ## Modals
 
