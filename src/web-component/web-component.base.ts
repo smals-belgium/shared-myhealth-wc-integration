@@ -1,4 +1,5 @@
 import { refreshEvent, type RefreshEvent, refreshEventType } from '../event/refresh.event';
+import type { AuthenticationStatus } from '../setting/authentication-status.setting';
 import type { ConfigName } from '../setting/config-name.setting';
 import type { UserLanguage } from '../setting/user-language.setting';
 import { WebComponentAttributeInitError } from './web-component.error';
@@ -91,7 +92,12 @@ export abstract class WebComponentElement extends HTMLElement implements WebComp
   get offlineDataStorageEnabled(): boolean { return this.getAttribute('offline-data-storage-enabled') !== 'false'; }
   set offlineDataStorageEnabled(value: boolean) { this.setAttribute('offline-data-storage-enabled', String(value)); }
 
+  get authenticationStatus(): AuthenticationStatus { return this.getAttribute('authentication-status') as AuthenticationStatus; }
+  set authenticationStatus(value: AuthenticationStatus) { this.setAttribute('authentication-status', value); }
+
+  /** @deprecated since version 5.0.2, use authenticationStatus instead */
   get isOfflineAuthenticated(): boolean { return this.getAttribute('is-offline-authenticated') !== 'false'; }
+  /** @deprecated since version 5.0.2, use authenticationStatus instead */
   set isOfflineAuthenticated(value: boolean) { this.setAttribute('is-offline-authenticated', String(value)); }
 
   constructor(template?: HTMLTemplateElement) {

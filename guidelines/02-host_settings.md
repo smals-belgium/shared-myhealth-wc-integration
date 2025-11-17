@@ -46,8 +46,9 @@ decoupled way.
 | userLanguage | Y | 'en' \| 'fr' \| 'nl' \| 'de' | Language used to display translated content to the end user. |
 | configName | Y | 'dev' \| 'demo' \| 'int' \| 'acc' \| 'prod' | Name of the environment configuration the application and the components are being deployed to. |
 | offlineDataStorageEnabled | N | boolean | A boolean flag indicating whether offline data storage has been enabled by the user. When true, the web component can store and retrieve data locally for offline access. |
-| isOfflineAuthenticated | N | boolean | A boolean flag indicating whether the web component is being accessed from an offline state. By offline state we mean when the user logged in using a "light" authentication (pin code, biometrics) that lets them access the offline stored data, as opposed to a "strong" authentication with ItsMe or Bosa wallet. When true, the web component might want to fetch the data that is stored in the offline storage. When false, it might want to fetch data from the backend and update the offline data. |
+| authenticationStatus | N |  'unauthenticated' \| 'online-authenticated' \| 'offline-authenticated'  | Status of the user's authentication within the host application. |
 | crashReportingEnabled | N | boolean | A boolean flag indicating if the user has given the permission to crash report to be sent. Must be implemented if the web component uses a crash report tool such as Sentry. |
+| ~~isOfflineAuthenticated (@deprecated since version 5.0.2)~~ | ~~N~~ | ~~boolean~~ | ~~A boolean flag indicating whether the web component is being accessed from an offline state. By offline state we mean when the user logged in using a "light" authentication (pin code, biometrics) that lets them access the offline stored data, as opposed to a "strong" authentication with ItsMe or Bosa wallet. When true, the web component might want to fetch the data that is stored in the offline storage. When false, it might want to fetch data from the backend and update the offline data.~~ |
 
 ## Property details
 
