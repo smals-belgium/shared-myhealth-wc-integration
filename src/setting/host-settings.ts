@@ -1,3 +1,4 @@
+import type { AuthenticationStatus } from './authentication-status.setting';
 import type { ConfigName } from './config-name.setting';
 import type { UserLanguage } from './user-language.setting';
 
@@ -36,6 +37,7 @@ export type HostSettings = Readonly<{
   offlineDataStorageEnabled: boolean;
 
   /**
+   * @deprecated since version 5.0.2, use authenticationStatus instead
    * A boolean flag indicating whether the web component is being accessed from an offline state.
    * By offline state we mean when the user logged in using a "light" authentication (pin code, biometrics) that lets
    * them access the offline stored data, as opposed to a "strong" authentication with itsme or Bosa wallet.
@@ -43,5 +45,8 @@ export type HostSettings = Readonly<{
    * When false, it might want to fetch data from the backend and update the offline data.
    */
   isOfflineAuthenticated: boolean;
+
+  /** @see AuthenticationStatus */
+  authenticationStatus: AuthenticationStatus;
 
 }>;

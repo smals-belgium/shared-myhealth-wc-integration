@@ -4,6 +4,8 @@
 
 * new guideline on working with documents
 * common pitfalls documentation
+* new `authenticationStatus` added to the host settings
+* made `isOfflineAuthenticated` deprecated, use the new `authenticationStatus` instead
 
 # 5.0.1
 

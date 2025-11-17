@@ -38,7 +38,8 @@ export const settingsChangeEvent = (detail: SettingsChangeEventDetail) =>
  *  - userLanguage
  *  - crashReportingEnabled
  *  - offlineDataStorageEnabled
- *  - isOfflineAuthenticated
+ *  - isOfflineAuthenticated (@deprecated since version 5.0.2, use authenticationStatus instead)
+ *  - authenticationStatus
  *
  * Listen for these events on the provided event bus.
  *
