@@ -1,5 +1,9 @@
 # main
 
+# 5.0.3
+
+* fix for missing export of the `authenticationStatus` typing
+
 # 5.0.2
 
 * new guideline on working with documents

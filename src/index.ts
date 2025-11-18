@@ -5,6 +5,7 @@ export * from './version';
 export * from './setting/config-name.setting';
 export * from './setting/host-settings';
 export * from './setting/user-language.setting';
+export * from './setting/authentication-status.setting';
 
 // host events
 export * from './event/refresh.event';
