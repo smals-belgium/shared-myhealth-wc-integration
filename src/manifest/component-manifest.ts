@@ -20,7 +20,8 @@ import { selectEventType } from '../event/select.event';
  * export const manifest: MyHealthComponentManifest = {
  *   tagName: 'my-component',
  *   inputs: ['detailId'],
- *   events: ['print']
+ *   events: ['print'],
+ *   requiredServices: ['medicaldatamanagement']
  * };
  * ```
  */
@@ -61,6 +62,13 @@ export type MyHealthComponentManifest = Readonly<{
    * on the component, and responding with a status `success` or `fail` after the operation is completed.
    */
   events?: ComponentEvent[];
+
+  /**
+   * * Services that must be present in the user's mandate to access this component.
+   * If not specified, the component is available to all types of mandates.
+   * Common service names: 'medicaldatamanagement', 'recipe'
+   */
+  requiredServices?: string[];
 
 }>;
 
