@@ -19,7 +19,8 @@ import { entryComponentManifest } from './entry-component.ts';
 export const manifest: MyHealthModuleManifest = {
   specVersion: { major: 5, minor: 0, patch: 0 },
   family: family('my-family'),
-  components: [entryComponentManifest]
+  components: [entryComponentManifest],
+  permissionsForMandateAccess: ['medicaldatamanagement']
 };
 ```
 
@@ -38,7 +39,8 @@ export const manifest: MyHealthModuleManifest = {
   components: [
     listComponentManifest,
     detailComponentManifest
-  ]
+  ],
+  permissionsForMandateAccess: ['medicaldatamanagement']
 };
 ```
 
@@ -51,6 +53,7 @@ Have a look at the [source code](../src//manifest/module-manifest.ts)
 | [specVersion](#specversion) | Indicates the version of the spec the web component module uses |
 | [family](#family) | A type for grouping multiple web-components that loosely interact with each other |
 | [components](#component-manifest) | One or more components exposed by this module |
+| [permissionsForMandateAccess](#permissionsformandateaccess) | Services required in the user's mandate to access this module |
 
 ### SpecVersion
 
@@ -71,7 +74,7 @@ export const version: SpecVersion = {
 };
 ```
 
-You may want to consider generating a file in your build pipeline 
+You may want to consider generating a file in your build pipeline
 like the above example from the `package.json` of the version of this library that you installed.
 
 ### Family
@@ -89,6 +92,35 @@ import { family } from '@smals-belgium/myhealth-wc-integration';
 const myFamily = family('my-family');
 ```
 
+### permissionsForMandateAccess
+
+Services that must be present in the user's mandate to access this module.
+If not specified, the module is available to all types of mandates.
+
+The values correspond to the `userProfile.serviceNames` field in the eHealth token.
+
+**IMPORTANT**: If multiple services are specified, the user needs **ANY** of them (not all).
+The module will be accessible if the user's mandate includes at least one of the listed services.
+
+This property allows you to restrict component access based on the user's authorization level.
+The host application can use this information to hide or disable components the user doesn't have permission to access
+
+Common service names include:
+- `medicaldatamanagement` - for medical data access
+- `recipe` - for prescription-related functionality
+
+Example usage:
+```ts
+export const manifest: MyHealthModuleManifest = {
+  specVersion: { major: 5, minor: 0, patch: 0 },
+  family: family('medical-records'),
+  components: [listComponentManifest, detailComponentManifest],
+  permissionsForMandateAccess: ['medicaldatamanagement']
+};
+```
+
+In this example, the entire `medical-records` module will only be accessible to users whose mandate includes the `medicaldatamanagement` service in their eHealth token's `userProfile.serviceNames`.
+
 ## Component manifest
 
 Each component in the module is also technically documented through a component manifest.
@@ -102,8 +134,7 @@ import type { MyHealthComponentManifest } from '@smals-belgium/myhealth-wc-integ
 export const manifest: MyHealthComponentManifest = {
   tagName: 'my-component',
   requiredProperties: ['detailId'],
-  events: ['print'],
-  permissionsForMandateAccess: ['medicaldatamanagement']
+  events: ['print']
 };
 ```
 
@@ -116,7 +147,6 @@ Have a look at the [source code](../src//manifest/component-manifest.ts)
 | [tagName](#tagname) | string | Y | The `tagName` of the HTML element |
 | [requiredProperties](#requiredproperties) | string[] | N | A list of properties the component expects (excluding [HostSettings](./02-host_settings.md)) |
 | [events](#events) | string[] | N | The events the component emits |
-| [permissionsForMandateAccess](#permissionsformandateaccess) | ServiceName[] | N | Services required in the user's mandate to access this component |
 
 ### tagName
 
@@ -154,30 +184,3 @@ Implementation of refresh mechanism is done by listening for `refresh` events wi
 on the component, and responding with a status `success` or `fail` after the operation is completed.
 
 See [guideline on pre-fetch versus refresh](./06-data_pre-fetching_vs_refreshing.md)
-
-### permissionsForMandateAccess
-
-Services that must be present in the user's mandate to access this component.
-If not specified, the component is available to all types of mandates.
-
-The values correspond to the userProfile.serviceNames field in the eHealth token.
-
-IMPORTANT: If multiple services are specified, the user needs ANY of them (not all).
-The component will be accessible if the user's mandate includes at least one of the listed services.
-
-This property allows you to restrict component access based on the user's authorization level.
-The host application can use this information to hide or disable components the user doesn't have permission to access
-
-Common service names include `medicaldatamanagement` and `recipe`
-
-Example usage:
-```ts
-export const manifest: MyHealthComponentManifest = {
-  tagName: 'medical-history-viewer',
-  requiredProperties: ['patientId'],
-  events: ['refresh'],
-  permissionsForMandateAccess: ['recipe']
-};
-```
-
-In this example, the `medical-history-viewer` component will only be accessible to users whose mandate includes the `recipe` service.

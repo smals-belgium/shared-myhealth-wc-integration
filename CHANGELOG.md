@@ -1,9 +1,13 @@
 # main
 
+# 5.0.5
+
+* Fix: move permissionsForMandateAccess from MyHealthComponentManifest to MyHealthModuleManifest
+
 # 5.0.4
 
 * Add `requiredServices` property to `MyHealthComponentManifest` to control component visibility based on mandate services
-* 
+
 # 5.0.3
 
 * fix for missing export of the `authenticationStatus` typing
