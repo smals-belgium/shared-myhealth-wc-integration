@@ -2,11 +2,11 @@
 
 # 5.0.5
 
-* Fix: move permissionsForMandateAccess from MyHealthComponentManifest to MyHealthModuleManifest
+* Fix: move `permissionsForMandateAccess` from `MyHealthComponentManifest` to `MyHealthModuleManifest`
 
 # 5.0.4
 
-* Add `requiredServices` property to `MyHealthComponentManifest` to control component visibility based on mandate services
+* Add `permissionsForMandateAccess` property to `MyHealthComponentManifest` to control component visibility based on mandate services
 
 # 5.0.3
 
