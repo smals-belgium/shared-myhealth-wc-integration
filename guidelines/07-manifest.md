@@ -101,8 +101,9 @@ import type { MyHealthComponentManifest } from '@smals-belgium/myhealth-wc-integ
 
 export const manifest: MyHealthComponentManifest = {
   tagName: 'my-component',
-  inputs: ['detailId'],
-  events: ['print']
+  requiredProperties: ['detailId'],
+  events: ['print'],
+  permissionsForMandateAccess: ['medicaldatamanagement']
 };
 ```
 
@@ -115,6 +116,7 @@ Have a look at the [source code](../src//manifest/component-manifest.ts)
 | [tagName](#tagname) | string | Y | The `tagName` of the HTML element |
 | [requiredProperties](#requiredproperties) | string[] | N | A list of properties the component expects (excluding [HostSettings](./02-host_settings.md)) |
 | [events](#events) | string[] | N | The events the component emits |
+| [permissionsForMandateAccess](#permissionsformandateaccess) | ServiceName[] | N | Services required in the user's mandate to access this component |
 
 ### tagName
 
@@ -152,3 +154,25 @@ Implementation of refresh mechanism is done by listening for `refresh` events wi
 on the component, and responding with a status `success` or `fail` after the operation is completed.
 
 See [guideline on pre-fetch versus refresh](./06-data_pre-fetching_vs_refreshing.md)
+
+### permissionsForMandateAccess
+
+Services that must be present in the user's mandate to access this component.
+If not specified, the component is available to all types of mandates.
+
+This property allows you to restrict component access based on the user's authorization level.
+The host application can use this information to hide or disable components the user doesn't have permission to access
+
+Common service names include `medicaldatamanagement` and `recipe`
+
+Example usage:
+```ts
+export const manifest: MyHealthComponentManifest = {
+  tagName: 'medical-history-viewer',
+  requiredProperties: ['patientId'],
+  events: ['refresh'],
+  permissionsForMandateAccess: ['recipe']
+};
+```
+
+In this example, the `medical-history-viewer` component will only be accessible to users whose mandate includes the `recipe` service.
