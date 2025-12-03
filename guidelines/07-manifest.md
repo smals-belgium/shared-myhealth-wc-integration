@@ -160,6 +160,11 @@ See [guideline on pre-fetch versus refresh](./06-data_pre-fetching_vs_refreshing
 Services that must be present in the user's mandate to access this component.
 If not specified, the component is available to all types of mandates.
 
+The values correspond to the userProfile.serviceNames field in the eHealth token.
+
+IMPORTANT: If multiple services are specified, the user needs ANY of them (not all).
+The component will be accessible if the user's mandate includes at least one of the listed services.
+
 This property allows you to restrict component access based on the user's authorization level.
 The host application can use this information to hide or disable components the user doesn't have permission to access
 
