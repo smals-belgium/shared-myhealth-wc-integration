@@ -19,9 +19,9 @@ import { selectEventType } from '../event/select.event';
  *
  * export const manifest: MyHealthComponentManifest = {
  *   tagName: 'my-component',
- *   inputs: ['detailId'],
+ *   requiredProperties: ['detailId'],
  *   events: ['print'],
- *   requiredServices: ['medicaldatamanagement']
+ *   permissionsForMandateAccess: ['medicaldatamanagement']
  * };
  * ```
  */
@@ -64,11 +64,11 @@ export type MyHealthComponentManifest = Readonly<{
   events?: ComponentEvent[];
 
   /**
-   * * Services that must be present in the user's mandate to access this component.
+   * Services that must be present in the user's mandate to access this component.
    * If not specified, the component is available to all types of mandates.
    * Common service names: 'medicaldatamanagement', 'recipe'
    */
-  requiredServices?: string[];
+  permissionsForMandateAccess?: ServiceName[];
 
 }>;
 
@@ -79,3 +79,9 @@ export type ComponentEvent =
   | typeof selectEventType
   // trick to allow any string, but still have code completion on the known ones
   | (string & Record<never, never>);
+
+
+export type ServiceName =
+  | 'medicaldatamanagement'
+  | 'recipe'
+  | (string & Record<never, never>)
