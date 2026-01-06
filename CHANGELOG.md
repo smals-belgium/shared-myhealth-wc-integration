@@ -1,5 +1,9 @@
 # main
 
+# 5.0.6
+
+* new guideline on handling regional differences
+
 # 5.0.5
 
 * Fix: move `permissionsForMandateAccess` from `MyHealthComponentManifest` to `MyHealthModuleManifest`

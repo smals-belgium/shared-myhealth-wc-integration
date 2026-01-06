@@ -11,7 +11,7 @@ Read about [component destruction in the lifecycle hooks](#init-and-destroy)
 how to track changes in element attributes  
 A: Read about [observedAttributes and how to observe their changes](#observing-attribute-changes)
 - Q: The guidelines say my web component is not allowed to do any navigation, but WCAG tells me I _should_ be using
-proper navigation elements (like `<a href="./url"></a>)  
+proper navigation elements (like `<a href="./url"></a>`)  
 A: Check our [proposed solutions](#navigation)
 
 ## Custom web components

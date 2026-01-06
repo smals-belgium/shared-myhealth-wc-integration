@@ -23,7 +23,7 @@ so each one of them must listen for changes to the `user-language` attribute.
 
 Be aware that there is a difference between component attributes and properties. If you're uncertain how to implement
 attributes in a custom component, have a look at the web components implementation section
-in [our common pitfalls](./21-common_pitfalls.md#custom-web-components).
+in [our common pitfalls](./22-common_pitfalls.md#custom-web-components).
 
 ### Module parameters
 
