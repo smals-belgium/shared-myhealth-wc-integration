@@ -10,6 +10,13 @@ export type AccessToken = string & { _brand: 'my-health:access-token' };
 export const accessToken = (s: string) => s as AccessToken;
 
 /**
+ * A JSON web token that proves that the user has been authenticated.
+ * May contain additional information about the user.
+ */
+export type IdToken = string & { _brand: 'my-health:id-token' };
+export const idToken = (s: string) => s as IdToken;
+
+/**
  * @summary
  * An object containing al services provided by the host application.
  *
@@ -63,5 +70,14 @@ export type HostServices = Readonly<{
    * If for whatever reason there should not be a valid token present, the Promise will be rejected.
    */
   getAccessToken(audience?: string): Promise<AccessToken>;
+
+  /**
+   * This function can be used to retrieve an ID token of the currently active profile.
+   * This can be helpful when the AccessToken has been pseudonymized or doesn't carry user infornation at all.
+   *
+   * Note that only the ID token of the main user can be retreived this way, since mandate profiles do not
+   * authenticate themselves.
+   */
+  getIdToken(): Promise<IdToken>;
 
 }>;
