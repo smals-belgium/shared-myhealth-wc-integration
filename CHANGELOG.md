@@ -2,7 +2,8 @@
 
 # 5.0.6
 
-* new guideline on handling regional differences
+* Add `getIdToken` function to `HostServices`
+* New guideline on handling regional differences
 
 # 5.0.5
 
