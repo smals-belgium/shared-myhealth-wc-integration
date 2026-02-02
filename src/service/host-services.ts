@@ -1,3 +1,5 @@
+import type { UserContactInfo } from '../setting/user-contact-info';
+import type { ContactInfoError } from './contact-info-error';
 import type { HostEventTarget } from './host-event-target';
 import type { OfflineDataStorage } from './offline-data-storage';
 
@@ -80,4 +82,16 @@ export type HostServices = Readonly<{
    */
   getIdToken(): Promise<IdToken>;
 
+  /**
+   * Save user contact information provided from a module in the host settings.
+   * This operation will patch the existing data, i.e. it will not erase any properties that are left `undefined`.
+   * If you wish to explicitly erase a property, set its value to `null`.
+   * The service will respond with a list of validation errors, which will be empty if all goes well.
+   */
+  patchContactInfo(contactInfo: Nullable<UserContactInfo>): ContactInfoError[];
+
 }>;
+
+type Nullable<T> = {
+  [P in keyof T]: T[P] | null;
+};

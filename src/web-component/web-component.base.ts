@@ -1,6 +1,7 @@
 import { refreshEvent, type RefreshEvent, refreshEventType } from '../event/refresh.event';
 import type { AuthenticationStatus } from '../setting/authentication-status.setting';
 import type { ConfigName } from '../setting/config-name.setting';
+import type { UserContactInfo } from '../setting/user-contact-info';
 import type { UserLanguage } from '../setting/user-language.setting';
 import { WebComponentAttributeInitError } from './web-component.error';
 import type { WebComponent, WebComponentAttribute } from './web-component.types';
@@ -12,7 +13,8 @@ export const webComponentAttributes: WebComponentAttribute[] = [
   'config-name',
   'crash-reporting-enabled',
   'offline-data-storage-enabled',
-  'is-offline-authenticated'
+  'is-offline-authenticated',
+  'user-contact-info'
 ];
 
 /**
@@ -99,6 +101,12 @@ export abstract class WebComponentElement extends HTMLElement implements WebComp
   get isOfflineAuthenticated(): boolean { return this.getAttribute('is-offline-authenticated') !== 'false'; }
   /** @deprecated since version 5.0.2, use authenticationStatus instead */
   set isOfflineAuthenticated(value: boolean) { this.setAttribute('is-offline-authenticated', String(value)); }
+
+  get userContactInfo(): UserContactInfo {
+    const value = this.getAttribute('user-contact-info')
+    return value ? JSON.parse(value) : {}
+  }
+  set userContactInfo(value: UserContactInfo) { this.setAttribute('user-contact-info', JSON.stringify(value)); }
 
   constructor(template?: HTMLTemplateElement) {
     super();
