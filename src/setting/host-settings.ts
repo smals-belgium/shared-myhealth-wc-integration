@@ -1,5 +1,6 @@
 import type { AuthenticationStatus } from './authentication-status.setting';
 import type { ConfigName } from './config-name.setting';
+import type { UserContactInfo } from './user-contact-info';
 import type { UserLanguage } from './user-language.setting';
 
 
@@ -48,5 +49,8 @@ export type HostSettings = Readonly<{
 
   /** @see AuthenticationStatus */
   authenticationStatus: AuthenticationStatus;
+
+  /** @see UserContactInfo */
+  userContactInfo: UserContactInfo;
 
 }>;

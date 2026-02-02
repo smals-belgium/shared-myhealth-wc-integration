@@ -1,5 +1,11 @@
 # main
 
+# 5.0.7
+
+* Add `userContactInfo` to `HostSettings`
+* Add `userContactInfo` to the base web component attributes
+* Add `patchContacInfo` to `HostServices`
+
 # 5.0.6
 
 * Add `getIdToken` function to `HostServices`

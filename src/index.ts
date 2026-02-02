@@ -4,6 +4,7 @@ export * from './version';
 // settings
 export * from './setting/config-name.setting';
 export * from './setting/host-settings';
+export * from './setting/user-contact-info';
 export * from './setting/user-language.setting';
 export * from './setting/authentication-status.setting';
 
@@ -18,6 +19,7 @@ export * from './event/print.event';
 export * from './event/select.event';
 
 // services
+export * from './service/contact-info-error';
 export * from './service/host-event-target';
 export * from './service/host-services';
 export * from './service/offline-data-storage';

@@ -49,6 +49,9 @@ decoupled way.
 | authenticationStatus | N |  'unauthenticated' \| 'online-authenticated' \| 'offline-authenticated'  | Status of the user's authentication within the host application. |
 | crashReportingEnabled | N | boolean | A boolean flag indicating if the user has given the permission to crash report to be sent. Must be implemented if the web component uses a crash report tool such as Sentry. |
 | ~~isOfflineAuthenticated (@deprecated since version 5.0.2)~~ | ~~N~~ | ~~boolean~~ | ~~A boolean flag indicating whether the web component is being accessed from an offline state. By offline state we mean when the user logged in using a "light" authentication (pin code, biometrics) that lets them access the offline stored data, as opposed to a "strong" authentication with ItsMe or Bosa wallet. When true, the web component might want to fetch the data that is stored in the offline storage. When false, it might want to fetch data from the backend and update the offline data.~~ |
+| userContactInfo | N | UserContactInfo | The main user's contact information form form pre-filling. |
+
+
 
 ## Property details
 
@@ -91,10 +94,38 @@ any time.
 
 TBD
 
-### isOfflineAuthenticated (optional)
+### authenticationStatus (optional)
 
-TBD
+An enumeration indicating what the authentication status of the user accessing the web component is.
+Some web components are "publicly" accessible. The status can be `unauthenticated` only for these.
+Most components though can only be accessed after authentication. This can be a "light" authentication 
+(pin code, biometrics) that lets them access the offline stored data. Or a "strong" authentication with ItsMe or Bosa 
+wallet. With `offline-authenticated`, the web component might want to fetch the data that is stored in the offline 
+storage. With `online-authenticated`, it might want to fetch data from the backend and update the offline data.
 
 ### crashReportingEnabled (optional)
 
 TBD
+
+### userContactInfo (optional)
+
+The main user's contact information.  
+This data can be used to prefill forms in modules.  
+The object will always be passed into components, but it could be empty if no contact info was configured.
+
+When another profile (mandate or child) is selected in the host app, the contact info remains that of the primary
+user of the app. For example, when ordering prescriptions on behalf of someone else, the contact info should still
+be that of the main user.
+
+Like all other host settings, the host app will send this data to the modules.  
+To a web component's attributes the object will be passed as a stringified JSON object. The component must
+deserialise the data before usage.  
+Data passed to the modules will always be validated, but since this can only be done client-side depending on the
+host app's context, the final validation responsibility always remains with the module's backend.
+
+Unlike other host settings, the module can send contact info back to the host application.  
+i.e. when the user fills in contact information inside a module form, that module can send that info to the host
+app and ask it to save this data.  
+The module can do its own validation if it wants to, but the host app will do a "second validation round" to make
+sure that data complies with its rules. You could compare this to server-side validation on top of client-side
+validation.
