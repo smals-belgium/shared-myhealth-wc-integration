@@ -147,6 +147,7 @@ Have a look at the [source code](../src//manifest/component-manifest.ts)
 | [tagName](#tagname) | string | Y | The `tagName` of the HTML element |
 | [requiredProperties](#requiredproperties) | string[] | N | A list of properties the component expects (excluding [HostSettings](./02-host_settings.md)) |
 | [events](#events) | string[] | N | The events the component emits |
+| [autoBrightness](#autobrightness) | boolean | N | Automatic max brightness for this component |
 
 ### tagName
 
@@ -184,3 +185,9 @@ Implementation of refresh mechanism is done by listening for `refresh` events wi
 on the component, and responding with a status `success` or `fail` after the operation is completed.
 
 See [guideline on pre-fetch versus refresh](./06-data_pre-fetching_vs_refreshing.md)
+
+### autoBrightness
+If `true`, the host application will automatically adjust brightness to maximum when this component is displayed,
+and put it back to its original value when the component is removed.  
+Typical usage is for components with bar or QR codes.  
+Not all host applications may support this feature. This is an indication to the hosts that could do something with it.
