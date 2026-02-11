@@ -5,6 +5,7 @@
 * Add `userContactInfo` to `HostSettings`
 * Add `userContactInfo` to the base web component attributes
 * Add `patchContacInfo` to `HostServices`
+* Add `autoBrightness` to `MyHealthComponentManifest`
 
 # 5.0.6
 

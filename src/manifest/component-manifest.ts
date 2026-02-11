@@ -37,6 +37,8 @@ export type MyHealthComponentManifest = Readonly<{
    * A list of properties that the component must have a value for so it can work properly.
    * This is optional because the host application can operate without knowing this,
    * but providing it gives the host the opportunity to do some validation prior to component initialisation.
+   *
+   * @default []
    */
   requiredProperties?: string[];
 
@@ -60,8 +62,21 @@ export type MyHealthComponentManifest = Readonly<{
    *
    * Implementation of refresh mechanism is done by listening for `refresh` events with `status: 'request'`
    * on the component, and responding with a status `success` or `fail` after the operation is completed.
+   *
+   * @default []
    */
   events?: ComponentEvent[];
+
+  /**
+   * If `true`, the host application will automatically adjust brightness to maximum when this component is displayed,
+   * and put it back to its original value when the component is removed.
+   * Typical usage is for components with bar or QR codes.
+   * Not all host applications may support this feature. This is an indication to the hosts that could do something
+   * with it.
+   *
+   * @default false
+   */
+  autoBrightness?: boolean
 }>;
 
 export type ComponentEvent =
