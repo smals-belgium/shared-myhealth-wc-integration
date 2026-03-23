@@ -14,9 +14,13 @@ export * from './event/settings-change.event';
 export * from './event/version-mismatch.event';
 
 // output events
+export * from './event/document.payload';
+export * from './event/download.event';
 export * from './event/open.event';
 export * from './event/print.event';
 export * from './event/select.event';
+export * from './event/share.event';
+export * from './event/view.event';
 
 // services
 export * from './service/contact-info-error';

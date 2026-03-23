@@ -1,11 +1,4 @@
-export const PrintMimeType = {
-  HTML: 'text/html',
-  PLAIN: 'text/plain',
-  PDF: 'application/pdf',
-  BASE64: 'application/base64',
-} as const;
-
-export type PrintMimeType = typeof PrintMimeType[keyof typeof PrintMimeType];
+import type { DocumentEventDetail } from './document.payload';
 
 export const PrintOrientation = {
   LANDSCAPE: 'landscape',
@@ -14,16 +7,7 @@ export const PrintOrientation = {
 
 export type PrintOrientation = typeof PrintOrientation[keyof typeof PrintOrientation];
 
-export type PrintEventDetail = Readonly<{
-
-  /** The title of the print job (e.g., the document name or page title). */
-  title: string;
-
-  /** The content to be printed. */
-  content: string;
-
-  /** The mime type of the requested print format. */
-  mimeType: PrintMimeType;
+export type PrintEventDetail = DocumentEventDetail & Readonly<{
 
   /** The orientation of the printed document (portrait or landscape). */
   orientation?: PrintOrientation;
