@@ -29,6 +29,49 @@ The integration library provides a few generic-purpose events that will cover mo
 | `select` | select an item | `type`: Discriminator to determine what is being selected. |
 | | | `id`: The ID of the selected item. |
 
+
+The following events are all related to document handling, and share a few common payload properties.
+
+All documents have a `title`. This may have different meaning depending on the specific action.  
+For example, when sharing the 'title' could be the email subject, but when printing it would be the print job name.
+
+Other shared properties depend on whether the document must be downloaded by the host app from a server
+or it's already available on the client.
+
+**Client**  
+A document that is already available on the client, i.e. it must no longer be downloaded from a server.
+We need a mime type to tell the host what kind of document is contained in the `content` property.
+If the mime type matches `text/*`, the content can be a simple string.
+Otherwise the content is considered binary and can be provided as a Blob or a base64-encoded string.
+- `content`: The content of the document in string or blob format. If the document format is binary, the content must
+be either a Blob or a base64-encoded string.
+- `mimeType`: The mime type of the document, which tells the host app how to deal with specific file types.
+
+**Server**  
+A document that can only be downloaded from a server.
+In this case, the mime type should be provided as a response header of the given `url`.
+This allows the host application to access the document directly and e.g. download it onto the device
+without having to load it into application memory first.
+The `url` can only be secured by the oidc authentication used by the host app.
+If any other securing mechanisms are used, you'll have to download the document in memory first
+and then send it to the host as a `ClientDocument`. Be aware that this approach may have performance impact.
+- `url`: A URL to download from a remote location
+- `audience`: In case a specific OIDC audience is needed for this document.
+By default the host app will determine the audience the same way as for any call to `getAccessToken()`.
+
+Below is the full list of document events with their corresponding additional payload on top of the shared properties.
+
+| Event type | Summary | Payload |
+| --- | --- | --- |
+| `download` | Download a document on device | N/A |
+| `print` | Send a document to printer | `orientation`: The orientation of the printed document (portrait or landscape). |
+| `share` | Share a document natively | `description`: Describe the doument to the sharee. |
+| | | `dialogTitle`: Set a title for the share modal (Android only). |
+| `view` | View the document directly in the app | `actions`: An array of actions that the host can perform in the viewer. |
+| | | `shareDescription`: See `description` property of `share` event. |
+| | | `printOrientation`: See `orientation` property of `print` event. |
+
+
 ### OpenEvent
 
 Request the host application to display the component provided in the event detail.

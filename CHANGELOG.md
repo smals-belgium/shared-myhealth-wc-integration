@@ -1,5 +1,16 @@
 # main
 
+# 6.0.0
+
+* Full document support from host applications
+  - Add `download` event to have the host download a document on device
+  - Add `share` event to have the host share a document natively
+  - Align existing `print` event with other document events
+  - Add `view` event to view the document in the host application
+* Change package scope from `@smals-belgium` to `@smals-belgium-shared`
+
+Make sure to check the [migration guide](./MIGRATION.md)
+
 # 5.0.7
 
 * Add `userContactInfo` to `HostSettings`
