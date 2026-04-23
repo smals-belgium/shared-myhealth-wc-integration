@@ -1,5 +1,8 @@
 # main
 
+# 5.0.8
+* Add `background` to `MyHealthComponentManifest`
+
 # 5.0.7
 
 * Add `userContactInfo` to `HostSettings`

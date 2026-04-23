@@ -77,6 +77,18 @@ export type MyHealthComponentManifest = Readonly<{
    * @default false
    */
   autoBrightness?: boolean
+
+  /**
+   * Determines the background displayed by the host application, so it can ensure that the backgrounds of the web
+   * component and other UI elements are aligned.
+   *
+   * - transparent: let's the host decide on a background, which could be something more fancy than a plain colour
+   * The component itself must be transparent for this to work as expected.
+   * - plain: use a plain background colour; the one determined by the default background colour of the design system
+   *
+   * @default 'plain'
+   */
+  background?: 'transparent' | 'plain'
 }>;
 
 export type ComponentEvent =

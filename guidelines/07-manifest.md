@@ -134,7 +134,9 @@ import type { MyHealthComponentManifest } from '@smals-belgium/myhealth-wc-integ
 export const manifest: MyHealthComponentManifest = {
   tagName: 'my-component',
   requiredProperties: ['detailId'],
-  events: ['print']
+  events: ['print'],
+  autoBrightness: true,
+  background: 'transparent'
 };
 ```
 
@@ -148,6 +150,7 @@ Have a look at the [source code](../src//manifest/component-manifest.ts)
 | [requiredProperties](#requiredproperties) | string[] | N | A list of properties the component expects (excluding [HostSettings](./02-host_settings.md)) |
 | [events](#events) | string[] | N | The events the component emits |
 | [autoBrightness](#autobrightness) | boolean | N | Automatic max brightness for this component |
+| [background](#background) | 'transparent' or 'plain' | N | Background of the host application |
 
 ### tagName
 
@@ -191,3 +194,11 @@ If `true`, the host application will automatically adjust brightness to maximum 
 and put it back to its original value when the component is removed.  
 Typical usage is for components with bar or QR codes.  
 Not all host applications may support this feature. This is an indication to the hosts that could do something with it.
+
+### background
+Determines the background displayed by the host application, so it can ensure that the backgrounds of the web
+component and other UI elements are aligned.
+
+ - `transparent`: let's the host decide on a background, which could be something more fancy than a plain colour.
+The component itself must be transparent for this to work as expected.
+ - `plain`: use a plain background colour; the one determined by the default background colour of the design system.
