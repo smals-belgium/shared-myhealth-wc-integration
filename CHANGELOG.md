@@ -8,6 +8,8 @@
   - Align existing `print` event with other document events
   - Add `view` event to view the document in the host application
 - Change package scope from `@smals-belgium` to `@smals-belgium-shared`
+- Update error tracking guidelines: mandatory tracking, error containment, and user-facing error clarity
+
 
 Make sure to check the [migration guide](./MIGRATION.md)
 
