@@ -1,5 +1,8 @@
 # main
 
+# 5.0.9
+* Update error tracking guidelines: mandatory tracking, error containment, and user-facing error clarity
+
 # 5.0.8
 * Add `background` to `MyHealthComponentManifest`
 
