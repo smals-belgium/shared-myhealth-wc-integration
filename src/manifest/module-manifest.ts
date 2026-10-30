@@ -47,7 +47,8 @@ export type MyHealthModuleManifest = Readonly<{
 
   /**
    * Services that must be present in the user's mandate to access this component.
-   * If not specified, the component is available to all types of mandates.
+   * If `undefined`, the component is available to all mandates.
+   * If this property is defined as an empty array (`[]`), the module is not available to any mandates, but only to the main profile.
    * Common service names: 'medicaldatamanagement', 'recipe'
    */
   permissionsForMandateAccess?: ServiceName[];
@@ -58,4 +59,3 @@ export type ServiceName =
   | 'medicaldatamanagement'
   | 'recipe'
   | (string & Record<never, never>)
-
