@@ -95,12 +95,23 @@ const myFamily = family('my-family');
 ### permissionsForMandateAccess
 
 Services that must be present in the user's mandate to access this module.
-If not specified, the module is available to all types of mandates.
+If this property is `undefined` (not specified), the module is available to all mandates.
+If this property is defined as an empty array (`[]`), the module is not available to any mandates, but onlyto the main profile.
 
 The values correspond to the `userProfile.serviceNames` field in the eHealth token.
 
 **IMPORTANT**: If multiple services are specified, the user needs **ANY** of them (not all).
 The module will be accessible if the user's mandate includes at least one of the listed services.
+
+Visibility matrix:
+
+| permissionsForMandateAccess | main | child | prescription mandate | general mandate |
+|---|---|---|---|---|
+| `undefined` | ✅ | ✅ | ✅ | ✅ |
+| `[]` | ✅ | ❌ | ❌ | ❌ |
+| `['recipe']` | ✅ | ✅ | ✅ | ✅ |
+| `['medicaldatamanagement']` | ✅ | ✅ | ❌ | ✅ |
+| `['recipe', 'medicaldatamanagement']` | ✅ | ✅ | ✅ | ✅ |
 
 This property allows you to restrict component access based on the user's authorization level.
 The host application can use this information to hide or disable components the user doesn't have permission to access
